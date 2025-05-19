@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MealItem from "./MealItem";
 import useHttp from "../hooks/useHttp";
+import ErrorPage from "./ErrorPage";
 
 const requestConfig = {}
 export default function Meals() {
@@ -18,6 +19,13 @@ export default function Meals() {
   if(isLoading){
     return <p>Fetching meals....</p>
   }
+
+if(error)
+{
+  return <ErrorPage title="failed to fetch meals" message={error} ></ErrorPage>
+}
+
+
   return (
     <ul id="meals">
       {loadedMeals.map((meal) => {
